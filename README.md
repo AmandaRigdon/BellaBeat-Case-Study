@@ -28,7 +28,7 @@ With this in mind, my case study aims to answer the following:
 
 ### About the Data ###
 
-For this case study, I will be using the Fitbit Fitness Tracker Data, a public dataset that's available on Kaggle. 30 participants were selected from a distributed survery via Amazon Mechanical Turk between March 3rd, 2016 and May 12, 2016. They consented to have their data shared.
+For this case study, I will be using the Fitbit Fitness Tracker Data, a public dataset that's available on Kaggle. 30 participants were selected from a survery distributed via Amazon Mechanical Turk between March 3rd, 2016 and May 12, 2016. They consented to have their data shared.
 
 This dataset has many differenct tables within it, so I'll be using RStudio to clean, sort, and analyze the data.
 
