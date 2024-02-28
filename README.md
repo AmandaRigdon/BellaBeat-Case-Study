@@ -354,6 +354,45 @@ Value            time               date
 ```
 Insights:
 
+* The mean heart rate is 77 BPM, which falls in line with the average heart rate of 60-100 BPM
+* The max is a staggering 203 BPM, which seems inaccurate unless this person was doing extremely vigorous activity
+
+**2. Merging Datasets**
+
+I'm interested in observing how sleep may relate to activity, so I will go ahead and merge those tables below:
+
+```r
+Sleep_vs._Activity <- merge(Sleep, Activity, by=c('Id', 'date'))
+head(Sleep_vs._Activity)
+```
+    Id     date   SleepDay TotalSleepRecords TotalMinutesAsleep TotalTimeInBed ActivityDate
+1 1503960366 04/12/16 2016-04-12                 1                327            346   2016-04-12
+2 1503960366 04/13/16 2016-04-13                 2                384            407   2016-04-13
+3 1503960366 04/15/16 2016-04-15                 1                412            442   2016-04-15
+4 1503960366 04/16/16 2016-04-16                 2                340            367   2016-04-16
+5 1503960366 04/17/16 2016-04-17                 1                700            712   2016-04-17
+6 1503960366 04/19/16 2016-04-19                 1                304            320   2016-04-19
+  TotalSteps TotalDistance TrackerDistance LoggedActivitiesDistance VeryActiveDistance
+1      13162          8.50            8.50                        0               1.88
+2      10735          6.97            6.97                        0               1.57
+3       9762          6.28            6.28                        0               2.14
+4      12669          8.16            8.16                        0               2.71
+5       9705          6.48            6.48                        0               3.19
+6      15506          9.88            9.88                        0               3.53
+  ModeratelyActiveDistance LightActiveDistance SedentaryActiveDistance VeryActiveMinutes
+1                     0.55                6.06                       0                25
+2                     0.69                4.71                       0                21
+3                     1.26                2.83                       0                29
+4                     0.41                5.04                       0                36
+5                     0.78                2.51                       0                38
+6                     1.32                5.03                       0                50
+  FairlyActiveMinutes LightlyActiveMinutes SedentaryMinutes Calories
+1                  13                  328              728     1985
+2                  19                  217              776     1797
+3                  34                  209              726     1745
+4                  10                  221              773     1863
+5                  20                  164              539     1728
+6                  31                  264              775     2035
 
 Avg_HR <- Heart_Rate %>% 
   dplyr::group_by(date) %>% 
