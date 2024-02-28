@@ -461,4 +461,9 @@ head(HR_vs._Activity)
 ggplot(data=Activity, aes(x=TotalSteps, y=Calories)) +
   geom_point(color='purple') + geom_smooth(color='darkgrey') + labs(title ="Total Steps vs. Calories")
 ```
-![](./images/
+![](./images/stepsvscals2.png)
+
+From the plot above, we can see that the more steps the participants took, the more calories they burned throughout the day.
+
+### 2. Minutes Asleep vs. Total Time in Bed
+
