@@ -226,7 +226,7 @@ Some notes on the above:
 
 ## Data Exploration
 
-**1. Dataset Summaries**
+### **1. Dataset Summaries**
 
 Activity
 
@@ -357,7 +357,7 @@ Insights:
 * The mean heart rate is 77 BPM, which falls in line with the average heart rate of 60-100 BPM
 * The max is a staggering 203 BPM, which seems inaccurate unless this person was doing extremely vigorous activity
 
-**2. Merging Datasets**
+### **2. Merging Datasets**
 
 I'm interested in observing how sleep may relate to activity, so I will go ahead and merge those tables below:
 
@@ -365,6 +365,7 @@ I'm interested in observing how sleep may relate to activity, so I will go ahead
 Sleep_vs._Activity <- merge(Sleep, Activity, by=c('Id', 'date'))
 head(Sleep_vs._Activity)
 ```
+```r
     Id     date   SleepDay TotalSleepRecords TotalMinutesAsleep TotalTimeInBed ActivityDate
 1 1503960366 04/12/16 2016-04-12                 1                327            346   2016-04-12
 2 1503960366 04/13/16 2016-04-13                 2                384            407   2016-04-13
@@ -372,13 +373,15 @@ head(Sleep_vs._Activity)
 4 1503960366 04/16/16 2016-04-16                 2                340            367   2016-04-16
 5 1503960366 04/17/16 2016-04-17                 1                700            712   2016-04-17
 6 1503960366 04/19/16 2016-04-19                 1                304            320   2016-04-19
-  TotalSteps TotalDistance TrackerDistance LoggedActivitiesDistance VeryActiveDistance
+
+ TotalSteps TotalDistance TrackerDistance LoggedActivitiesDistance VeryActiveDistance
 1      13162          8.50            8.50                        0               1.88
 2      10735          6.97            6.97                        0               1.57
 3       9762          6.28            6.28                        0               2.14
 4      12669          8.16            8.16                        0               2.71
 5       9705          6.48            6.48                        0               3.19
 6      15506          9.88            9.88                        0               3.53
+
   ModeratelyActiveDistance LightActiveDistance SedentaryActiveDistance VeryActiveMinutes
 1                     0.55                6.06                       0                25
 2                     0.69                4.71                       0                21
@@ -386,18 +389,76 @@ head(Sleep_vs._Activity)
 4                     0.41                5.04                       0                36
 5                     0.78                2.51                       0                38
 6                     1.32                5.03                       0                50
-  FairlyActiveMinutes LightlyActiveMinutes SedentaryMinutes Calories
+
+FairlyActiveMinutes LightlyActiveMinutes SedentaryMinutes Calories
 1                  13                  328              728     1985
 2                  19                  217              776     1797
 3                  34                  209              726     1745
 4                  10                  221              773     1863
 5                  20                  164              539     1728
 6                  31                  264              775     2035
+```
+I'm also curious about heart rate vs. activity level, something that I personally track on my own FitBit. But to merge these tables first, I will have the find the average heart rate by day:
 
+```r
 Avg_HR <- Heart_Rate %>% 
   dplyr::group_by(date) %>% 
   summarize(mean(Value))
 ```
+```r
+head(Avg_HR)
+ A tibble: 6 × 3
+# Groups:   date [1]
+  date             Id Avg_HR
+  <chr>         <dbl>  <dbl>
+1 04/12/16 2022484408   75.8
+2 04/12/16 2347167796   86.1
+3 04/12/16 4020332650   83.5
+4 04/12/16 4558609924   76.6
+5 04/12/16 5553957443   64.4
+6 04/12/16 5577150313   65.7
 ```
+This took a while to pull off, but I finally was able to get it right!
+
+Now we can merge this with the Activity table!
+
+```r
+HR_vs._Activity <-merge(Avg_HR, Activity, by=c('date', 'Id'))
+```
+```r
+head(HR_vs._Activity)
+
+     date         Id   Avg_HR ActivityDate TotalSteps TotalDistance TrackerDistance LoggedActivitiesDistance
+1 04/12/16 2022484408 75.80418   2016-04-12      11875          8.34            8.34                        0
+2 04/12/16 2347167796 86.08233   2016-04-12      10113          6.83            6.83                        0
+3 04/12/16 4020332650 83.49901   2016-04-12       8539          6.12            6.12                        0
+4 04/12/16 4558609924 76.63938   2016-04-12       5135          3.39            3.39                        0
+5 04/12/16 5553957443 64.36511   2016-04-12      11596          7.57            7.57                        0
+6 04/12/16 5577150313 65.65607   2016-04-12       8135          6.08            6.08                        0
+
+  VeryActiveDistance ModeratelyActiveDistance LightActiveDistance SedentaryActiveDistance VeryActiveMinutes
+1               3.31                     0.77                4.26                       0                42
+2               2.00                     0.62                4.20                       0                28
+3               0.15                     0.24                5.68                       0                 4
+4               0.00                     0.00                3.39                       0                 0
+5               1.37                     0.79                5.41                       0                19
+6               3.60                     0.38                2.10                       0                86
+
+  FairlyActiveMinutes LightlyActiveMinutes SedentaryMinutes Calories
+1                  14                  227             1157     2390
+2                  13                  320              964     2344
+3                  15                  331              712     3654
+4                   0                  318             1122     1909
+5                  13                  277              767     2026
+6                  16                  140              728     3405
 ```
 
+## Data Visualization
+
+### 1. Steps vs. Calories Burnt
+
+```r
+ggplot(data=Activity, aes(x=TotalSteps, y=Calories)) +
+  geom_point(color='purple') + geom_smooth(color='darkgrey') + labs(title ="Total Steps vs. Calories")
+```
+![](./images/
