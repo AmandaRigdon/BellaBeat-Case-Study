@@ -463,7 +463,93 @@ ggplot(data=Activity, aes(x=TotalSteps, y=Calories)) +
 ```
 ![](./images/stepsvscals2.png)
 
-From the plot above, we can see that the more steps the participants took, the more calories they burned throughout the day.
+From the plot above, we can see that the more steps the participants took, the more calories they burned throughout the day. This is obvious, but if Bellabeat wants to keep users motivated, they may offer affimartions for people as they stay active throughout the day.
 
 ### 2. Minutes Asleep vs. Total Time in Bed
+
+```r
+ggplot(data=Sleep, aes(x=TotalMinutesAsleep, y=TotalTimeInBed)) +
+  geom_point(color='purple')+ labs(title ="Total Minutes Asleep vs. Total Time in Bed")
+```
+![](./images/minsasleepbed.png)
+
+There seems to be a linear relationship with total minutes asleep vs. total time in bed. Bellabeat could use this information to remind users to wind down/go to bed.
+
+### 3. Intensity by Hour
+
+To plot this correctly, we will first need to summarize data from the Intensities table:
+
+```r
+Hourly_Intensities <- Intensities %>%
+  group_by(time) %>%
+  drop_na() %>%
+  summarize(mean_total_int = mean(TotalIntensity))
+```
+```r
+# A tibble: 6 × 2
+  time     mean_total_int
+  <chr>             <dbl>
+1 00:00:00          2.13 
+2 01:00:00          1.42 
+3 02:00:00          1.04 
+4 03:00:00          0.444
+5 04:00:00          0.633
+6 05:00:00          4.95 
+```
+Now we can plot our data!
+
+```r
+ggplot(data=Hourly_Intensities, aes(x=time, y=mean_total_int)) + geom_histogram(stat = "identity", fill='purple') +
+  theme(axis.text.x = element_text(angle = 90)) + labs(title="Average Total Intensity vs. Time")
+```
+![](./images/intensitytime.png)
+
+For this dataset, it looks like people were most active around 5-6pm. If people work out or walk during this time, Bellabeat could set reminders to motivate them. Either this, or Bellabeat could suggest users to get more activity throughout the day aside from just an hour out of the day.
+
+### 4. Sedentary Minutes vs. Sleep
+
+```r
+ggplot(data=Sleep_vs._Activity, aes(x=TotalMinutesAsleep, y=SedentaryMinutes)) + 
+  geom_point(color='purple') + geom_smooth(color='darkgrey') +
+  labs(title="Minutes Asleep vs. Sedentary Minutes")
+```
+![](./images/minasleepsed.png)
+
+There's a negative correlation here between minutes asleep and sedentary minutes. The more active you are, the better sleep you get.
+
+### 5. Heart Rate vs. Activity Level
+
+```r
+ggplot(data=HR_vs._Activity, aes(x=Avg_HR, y=TotalSteps)) + 
+  geom_point(color='purple') + geom_smooth(color='darkgrey') +
+  labs(title = "Heart Rate vs. Steps")
+```
+![](./images/hrsteps.png)
+
+This one is a bit inconclusive. The amount of steps taken per day may have an effect on a lower average heart rate overall.
+
+```r
+ggplot(data=HR_vs._Activity, aes(x=Avg_HR, y=SedentaryMinutes)) + 
+  geom_point(color='purple') + geom_smooth(color='darkgrey') +
+  labs(title = "Heart Rate vs. Sedentary Minutes")
+```
+![](./images/hrsedmins.png)
+
+For this one, a negative correlation shows that the lower your sedentary minutes are, the lower your average heart rate is. Keeping a consistent level of activity has been shown to lower heart rate in the long run.
+
+### Summary of Findings:
+
+* Activity level is correlated with better sleep and a lower heart rate, which could be indicative of better heart health.
+* Participants were mostly active between 5-6pm, and on average spent around 8 hours sedentary in one day. This leads me to believe they may have had office jobs that kept them sedentary throughout the day.
+* Participants only averaged around 7,000 steps a day, which is lower than the CDC recommendation of 10,000. They also burned more calories per day if they took more steps.
+* Activity level also has a correlation with better sleep quality.
+* There's a linear relationship with time spent in bed and total sleep time, driving the importance of winding down and getting to bed to get a good night's sleep.
+
+## Recommendations
+
+
+
+
+
+
 
