@@ -8,10 +8,10 @@
   * Business Task
   * About the Data
   * Limitations
-* :wrench: Data Prepartion
-* :telescope: Data Exploration
-* :bar_chart: Data Visualization
-* :heavy_check_mark: Recommendations
+* :wrench: [Data Prepartion](#wrench-data-preparation)
+* :telescope: [Data Exploration](#telescope-data-exploration)
+* :bar_chart: [Data Visualization](#bar_chart-data-visualization)
+* :heavy_check_mark: [Recommendations](#heavy_check_mark-recommendations)
 
 ## :mag_right: Background Information
 
