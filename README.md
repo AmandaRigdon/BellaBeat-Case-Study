@@ -1,17 +1,19 @@
-# BellaBeat-Case-Study 
+# BellaBeat Case Study
 
-### Contents: ###
+![](./images/bellabeatcircle.png)
 
-* Background Info
+## :page_with_curl: Contents: ##
+
+* :mag_right: [Background Information](mag_right-background-information)
   * Business Task
   * About the Data
   * Limitations
-* Data Prepartion
-* Data Exploration
-* Data Visualization
-* Recommendations
+* :wrench: Data Prepartion
+* :telescope: Data Exploration
+* :bar_chart: Data Visualization
+* :heavy_check_mark: Recommendations
 
-## Background Information
+## :mag_right: Background Information
 
 Bellabeat is a woman-focused company that creates high tech products centered around health. They offer high-tech products that aim to empower women by tracking their health through their activity, stress, sleep, menstrual cycle, and mindfullness habits. 
 This includes a wellness tracker called Leaf, a wellness watch called Time, and a water bottle called Spring that helps to track hydration. Bellabeat also offers a subscription-based membership for guidance on nutrition, acitivty, sleep, and much more.
@@ -43,7 +45,7 @@ This dataset has many differenct tables within it, so I'll be using RStudio to c
 
 It will be important to keep all of this in mind as we delve into the data to see what we can find.
 
-## Data Preparation
+## :wrench: Data Preparation
 
 **1. Install and Load packages**
 ```r
@@ -224,7 +226,7 @@ Some notes on the above:
 
  WIth all this in mind, let's continue to explore the data now that it's been cleaned and ready to go.
 
-## Data Exploration
+## :telescope: Data Exploration
 
 ### **1. Dataset Summaries**
 
@@ -246,7 +248,7 @@ Activity %>%
  3rd Qu.:10727   3rd Qu.: 7.713   3rd Qu.:1229.5   3rd Qu.:2793  
  Max.   :36019   Max.   :28.030   Max.   :1440.0   Max.   :4900  
 ```
-Insights:
+:bulb: Insights:
 
 * The mean step count is 7,638. The CDC recommends that most adults aim for 10,000 steps a day. We could use this info to help Bellabeat motivate people to take more steps
 * Something else that stands out is that all of the categories in the table above have minimum's of 0. This could indicate that there were some days that participants did not wear their FitBit at all.
@@ -267,7 +269,7 @@ VeryActiveMinutes FairlyActiveMinutes LightlyActiveMinutes
  3rd Qu.: 32.00    3rd Qu.: 19.00      3rd Qu.:264.0       
  Max.   :210.00    Max.   :143.00      Max.   :518.0
 ```
-Insights:
+:bulb: Insights:
 
 * Once again we have a minimum of zero across all categories, leading to confirm my suspicion above
 * The mean of very active minutes is quite low at around 21 minutes
@@ -289,7 +291,7 @@ Min.   : 42.00
  3rd Qu.:108.00  
  Max.   :948.00
 ```
-Insights:
+:bulb: Insights:
 
 * This is not 97 cals/day, rather 97 cals/hour. If we add that up to one day, it's around 2328 calories on average.
 * The max cal/hour is 948. Can someone burn that many calories in one hour? This could be an outliet or a fluke in the data
@@ -310,7 +312,7 @@ TotalSleepRecords TotalMinutesAsleep TotalTimeInBed
  3rd Qu.:1.000     3rd Qu.:490.0      3rd Qu.:526.0  
  Max.   :3.000     Max.   :796.0      Max.   :961.0 
 ```
-Insights:
+:bulb: Insights:
 
 * Mean minutes asleep is 419.5 or 6.99 hours
 * Mean of total time in bed is 7.64 hours. That gives us a difference of .65, which means the group in this set spent an average of 35 mins awake in bed
@@ -331,7 +333,7 @@ WeightKg           BMI
  3rd Qu.: 85.05   3rd Qu.:25.56  
  Max.   :133.50   Max.   :47.54
 ```
-Insights:
+:bulb: Insights:
 
 * The average weight of the 8 participants in this set is 72 kg or 158 lbs
 * Highest weight is 133.5 or around 291 lbs, lowest is 52.6 or around 116 lbs. That's a good variation, but it would be great if there were more participants that also had varying weights
@@ -352,7 +354,7 @@ Value            time               date
  3rd Qu.: 88.00                                        
  Max.   :203.00           
 ```
-Insights:
+:bulb: Insights:
 
 * The mean heart rate is 77 BPM, which falls in line with the average heart rate of 60-100 BPM
 * The max is a staggering 203 BPM, which seems inaccurate unless this person was doing extremely vigorous activity
@@ -453,7 +455,7 @@ head(HR_vs._Activity)
 6                  16                  140              728     3405
 ```
 
-## Data Visualization
+## :bar_chart: Data Visualization
 
 ### 1. Steps vs. Calories Burnt
 
@@ -537,7 +539,7 @@ ggplot(data=HR_vs._Activity, aes(x=Avg_HR, y=SedentaryMinutes)) +
 
 For this one, a negative correlation shows that the lower your sedentary minutes are, the lower your average heart rate is. Keeping a consistent level of activity has been shown to lower heart rate in the long run.
 
-### Summary of Findings:
+### :clipboard: Summary of Findings:
 
 * Activity level is correlated with better sleep and a lower heart rate, which could be indicative of better heart health.
 * Participants were mostly active between 5-6pm, and on average spent around 8 hours sedentary in one day. This leads me to believe they may have had office jobs that kept them sedentary throughout the day.
@@ -545,11 +547,24 @@ For this one, a negative correlation shows that the lower your sedentary minutes
 * Activity level also has a correlation with better sleep quality.
 * There's a linear relationship with time spent in bed and total sleep time, driving the importance of winding down and getting to bed to get a good night's sleep.
 
-## Recommendations
+## :heavy_check_mark: Recommendations
 
+![](./images/stretching.jpg)
 
+Based on the findings above, we can recommend the following:
 
+### Target Audience
 
+* Since most of these participants were sedentary throughout the day, they likely work office jobs or jobs that require them to be at a computer most of the day. Bellabeat could focus on targeting their smart device towards women who work sedentary jobs to motivate them to get more activity throughout their day, as well as manage their stress.
+* Weight data was scarce and we would need more to make a conclusion, but Bellabeat should, regardless, focus on empowering women of all sizes.
 
+### App Implementations
+
+* Bellabeat can work on motivating users by using positive motivation when someone is active to keep them going. If the app detects the person is engaging in an activity, it can send a notification to the watch that says "Keep it up!".
+* Users can set their intended step goal and active minutes per day, and the Bellebeat app will celebrate when they hit their goals for the day.
+* Achievements for certain milestones (i.e. 20,000 steps in a day, 30 minutes of vigorous activity) that can encourage users to maintain an active lifestyle.
+* Reminders to go to sleep and wind down for bed. There could be a meditation feature as well as celebrations for when someone gets a full night's sleep (something the user can set on their own).
+* Implementing a reminder to exercise during their reguarly scheduled time. In this analysis, it was 5-6pm.
+* Heart rate tracking that shows their cardio health (which is calculated from the user profile and their resting heart rate). This could be very motivating for someone to see their cardio health improve over time as they are more active.
 
 
