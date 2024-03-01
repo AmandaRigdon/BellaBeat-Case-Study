@@ -4,7 +4,7 @@
 
 ## :page_with_curl: Contents: ##
 
-* :mag_right: [Background Information](mag_right-background-information)
+* :mag_right: [Background Information](#mag_right-background-information)
   * Business Task
   * About the Data
   * Limitations
